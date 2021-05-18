@@ -35,7 +35,8 @@ module.exports = function makeDockerCompose( spinner ) {
 					depends_on: [ 'phpfpm' ],
 					networks: [ 'default', 'wplocaldocker' ],
 					volumes: [
-						'./wordpress:/var/www/html:cached',
+						"./wordpress:/var/www",
+						"./wordpress/web:/var/www/html:cached",
 						'./config/nginx/server.conf:/etc/nginx/conf.d/common/_server.conf:cached',
 					],
 					environment: {
@@ -50,7 +51,8 @@ module.exports = function makeDockerCompose( spinner ) {
 					networks: [ 'default', 'wplocaldocker' ],
 					dns: [ '10.0.0.2' ],
 					volumes: [
-						'./wordpress:/var/www/html:cached',
+						"./wordpress:/var/www",
+						"./wordpress/web:/var/www/html:cached",
 						'./config/php-fpm/docker-php-ext-xdebug.ini:/etc/php.d/docker-php-ext-xdebug.ini:cached',
 						`${ cacheVolume }:/var/www/.wp-cli/cache:cached`,
 					],
