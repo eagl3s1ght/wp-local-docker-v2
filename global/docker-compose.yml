@@ -8,8 +8,8 @@ services:
       - NET_ADMIN
     command: -A /test/10.0.0.3 --log-facility=-
     ports:
-        - 127.0.0.1:53:53/udp
-        - 127.0.0.1:53:53
+      - 127.0.0.1:53:53/udp
+      - 127.0.0.1:53:53
     networks:
       wplocaldocker:
         ipv4_address: 10.0.0.2
@@ -20,6 +20,7 @@ services:
       - 127.0.0.1:80:80
       - 127.0.0.1:443:443
     volumes:
+      - ./config/nginx/vhost.d:/etc/nginx/vhost.d:ro
       - ./ssl-certs:/etc/nginx/certs:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
     networks:
